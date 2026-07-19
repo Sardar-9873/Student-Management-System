@@ -97,6 +97,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
                     <NavLink
                         to="/dashboard/students"
+                        end
                         className={navLinkClasses}
                         onClick={closeSidebar}
                     >
@@ -106,6 +107,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
                     <NavLink
                         to="/dashboard/students/add"
+                        end
                         className={navLinkClasses}
                         onClick={closeSidebar}
                     >
@@ -125,6 +127,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
                     <NavLink
                         to="/dashboard/about"
+                        end
                         className={navLinkClasses}
                         onClick={closeSidebar}
                     >
@@ -134,6 +137,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
                     <NavLink
                         to="/dashboard/contact"
+                        end
                         className={navLinkClasses}
                         onClick={closeSidebar}
                     >
@@ -143,6 +147,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
 
                     <NavLink
                         to="/dashboard/settings"
+                        end
                         className={navLinkClasses}
                         onClick={closeSidebar}
                     >

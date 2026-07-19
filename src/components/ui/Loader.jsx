@@ -12,6 +12,7 @@ export default function Loader() {
                 border-t-transparent
                 rounded-full
                 animate-spin
+                mt-65
             ">
 
             </div>

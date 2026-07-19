@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router";
 import { FiArrowRight, FiUsers, FiDatabase, FiShield } from "react-icons/fi";
+import Button from "../../components/ui/Button.jsx";
+import Card from "../../components/ui/Card.jsx";
+import Footer from "../../components/layout/Footer.jsx";
+
 
 export default function Home() {
 
@@ -7,8 +11,9 @@ export default function Home() {
 
     return (
 
-        <div className="min-h-screen bg-slate-100">
+        <div className="min-h-screen bg-slate-100 flex flex-col">
 
+            <main className="flex-1">
             {/* Hero */}
 
             <section className="max-w-7xl mx-auto px-6 py-20 text-center">
@@ -27,7 +32,7 @@ export default function Home() {
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4 mt-10">
 
-                    <button
+                    <Button
 
                         onClick={() => navigate("/signup")}
 
@@ -37,19 +42,20 @@ export default function Home() {
 
                         Get Started
 
-                    </button>
+                    </Button>
 
-                    <button
+                    <Button
 
                         onClick={() => navigate("/signin")}
 
-                        className="border border-slate-300 bg-white hover:bg-slate-50 px-8 py-3 rounded-xl font-semibold transition"
+                        className="px-8 py-3 rounded-xl font-bold transition"
+                        variant="primary"
 
                     >
 
                         Sign In
 
-                    </button>
+                    </Button>
 
                 </div>
 
@@ -61,72 +67,57 @@ export default function Home() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                    <div className="bg-white rounded-xl shadow p-8 text-center">
+                    <Card className="text-center hover:shadow-lg transition">
 
                         <FiUsers className="text-5xl text-blue-600 mx-auto" />
 
                         <h2 className="font-bold text-xl mt-4">
-
                             Student CRUD
-
                         </h2>
 
                         <p className="text-slate-500 mt-2">
-
                             Add, Update, Delete and Search Students.
-
                         </p>
 
-                    </div>
+                    </Card>
 
-                    <div className="bg-white rounded-xl shadow p-8 text-center">
+                    <Card className="text-center hover:shadow-lg transition">
 
                         <FiDatabase className="text-5xl text-green-600 mx-auto" />
 
                         <h2 className="font-bold text-xl mt-4">
-
                             Firebase
-
                         </h2>
 
                         <p className="text-slate-500 mt-2">
-
                             Firestore Realtime Database Integration.
-
                         </p>
 
-                    </div>
+                    </Card>
 
-                    <div className="bg-white rounded-xl shadow p-8 text-center">
+                    <Card className="text-center hover:shadow-lg transition">
 
                         <FiShield className="text-5xl text-purple-600 mx-auto" />
 
                         <h2 className="font-bold text-xl mt-4">
-
                             Secure Login
-
                         </h2>
 
                         <p className="text-slate-500 mt-2">
-
                             Authentication with Firebase.
-
                         </p>
 
-                    </div>
+                    </Card>
 
                 </div>
 
             </section>
 
+            </main>
+
             {/* Footer */}
 
-            <footer className="border-t py-6 text-center text-slate-500">
-
-                © 2026 StudentMS. All Rights Reserved.
-
-            </footer>
-
+            <Footer />
         </div>
 
     );

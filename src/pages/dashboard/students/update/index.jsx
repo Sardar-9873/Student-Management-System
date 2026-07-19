@@ -12,6 +12,9 @@ import {
     updateStudent,
     getStudentById
 } from "../../../../lib/firebase/firestore";
+import toast from "react-hot-toast";
+
+import StudentFormSkeleton from "../../../../components/skeletons/StudentFormSkeleton.jsx";
 
 export default function UpdateStudent() {
 
@@ -24,6 +27,8 @@ export default function UpdateStudent() {
     const [age, setAge] = useState("");
 
     const [city, setCity] = useState("");
+
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
@@ -45,27 +50,50 @@ export default function UpdateStudent() {
 
             setCity(student.city);
 
+            setLoading(false);
+
         }
 
         fetchStudent();
 
     }, []);
 
+
+    if (loading) {
+
+        return <StudentFormSkeleton />;
+
+    }
+
     async function updateStudentHandler() {
 
         try {
 
-            await updateStudent(id, {
 
-                name,
+            if (!name || !age || !city) {
+                toast("Please fill all fields.", {
+                    icon: "⚠️",
+                });
+                return;
+            }
 
-                age,
+            await toast.promise(
+                updateStudent(id, {
 
-                city
+                    name,
 
-            });
+                    age,
 
-            alert("Student Updated Successfully");
+                    city
+
+                }),
+                {
+                    loading: "Updating student...",
+
+                    success: "Student updated.",
+
+                    error: "Update failed."
+                });
 
             navigate("/dashboard/students");
 
@@ -73,7 +101,7 @@ export default function UpdateStudent() {
 
         catch (error) {
 
-            alert(error.message);
+            toast.error(error.message);
 
         }
 

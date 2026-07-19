@@ -14,6 +14,8 @@ export default function Input({
 
     error
 
+    ,autoComplete
+
 }) {
 
     return (
@@ -71,6 +73,8 @@ export default function Input({
                         focus:border-blue-500
                         transition
                     `}
+
+                    autoComplete={autoComplete}
                 />
 
             </div>

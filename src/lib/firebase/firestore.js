@@ -1,15 +1,19 @@
 import app from "./index.js";
+
 import {
     getFirestore,
     collection,
     addDoc,
-    getDocs,
     getDoc,
     doc,
     deleteDoc,
     updateDoc,
-    onSnapshot
+    onSnapshot,
+    query,
+    where
 } from "firebase/firestore";
+
+import auth from "./auth.js";
 
 const db = getFirestore(app);
 
@@ -23,43 +27,17 @@ const collectionRef = collection(db, "students");
 
 export async function addStudent(student) {
 
-    const result = await addDoc(
-        collectionRef,
-        student
-    );
+    const result = await addDoc(collectionRef, {
+
+        ...student,
+
+        ownerId: auth.currentUser.uid
+
+    });
 
     return result;
 
 }
-
-// ======================
-// READ
-// ======================
-
-// export async function getStudents() {
-
-//     const snapshot = await getDocs(
-//         collectionRef
-//     );
-
-//     const students = [];
-
-//     snapshot.forEach((doc) => {
-
-//         students.push({
-
-//             ...doc.data(),
-
-//             id: doc.id
-
-//         });
-
-//     });
-
-//     return students;
-
-// }
-
 
 // ======================
 // DELETE
@@ -69,13 +47,9 @@ export async function deleteStudent(id) {
 
     const docRef = doc(db, "students", id);
 
-
-    await deleteDoc(
-        docRef
-    );
+    await deleteDoc(docRef);
 
 }
-
 
 // ======================
 // UPDATE
@@ -85,71 +59,72 @@ export async function updateStudent(id, data) {
 
     const docRef = doc(db, "students", id);
 
-    await updateDoc(
-        docRef,
-        data
-    );
+    await updateDoc(docRef, data);
 
 }
 
-
 // ======================
-// Listener
+// REALTIME LISTENER
 // ======================
 
 export function listenStudents(cb) {
 
-    const collectionRef = collection(db, "students");
+    const q = query(
 
-    return onSnapshot(
+        collection(db, "students"),
 
-        collectionRef,
-
-        (snapshot) => {
-
-            const students = [];
-
-            snapshot.forEach((doc) => {
-
-                students.push({
-
-                    ...doc.data(),
-
-                    id: doc.id
-
-                });
-
-            });
-
-            cb(students);
-
-        }
+        where(
+            "ownerId",
+            "==",
+            auth.currentUser.uid
+        )
 
     );
 
+    return onSnapshot(q, (snapshot) => {
+
+        const students = [];
+
+        snapshot.forEach((doc) => {
+
+            students.push({
+
+                ...doc.data(),
+
+                id: doc.id
+
+            });
+
+        });
+
+        cb(students);
+
+    });
+
 }
 
-
-// ===================
+// ======================
 // READ SINGLE
-// ===================
-
+// ======================
 
 export async function getStudentById(id) {
 
     const docRef = doc(db, "students", id);
+
     const snapshot = await getDoc(docRef);
 
+    if (!snapshot.exists()) {
 
-    if(!snapshot.exists()){
         return null;
+
     }
 
-    return(
-        {
-            ...snapshot.data(),
+    return {
 
-            id: snapshot.id
-        }
-    );
+        ...snapshot.data(),
+
+        id: snapshot.id
+
+    };
+
 }

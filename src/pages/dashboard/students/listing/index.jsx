@@ -4,10 +4,15 @@ import { deleteStudent, listenStudents } from "../../../../lib/firebase/firestor
 import StudentTable from "../../../../components/students/StudentTable";
 import EmptyState from "../../../../components/ui/EmptyState";
 import SearchBar from "../../../../components/ui/SearchBar";
+import toast from "react-hot-toast";
+import Button from "../../../../components/ui/Button";
+import StudentTableSkeleton from "../../../../components/skeletons/StudentTableSkeleton.jsx";
+import SearchEmptyState from "../../../../components/ui/SearchEmptyState";
 
 
 export default function Students() {
     const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(true);
     const [students, setStudents] = useState([]);
     const navigate = useNavigate();
 
@@ -27,6 +32,7 @@ export default function Students() {
             (students) => {
 
                 setStudents(students);
+                setLoading(false);
 
             }
 
@@ -40,84 +46,87 @@ export default function Students() {
 
     }, []);
 
-    // function getId() {
-    //     students.map((student) => {
-    //         return student.id;
-    //     })
-    // }
+    if (loading) {
 
-    // const id = getId();
+        return <StudentTableSkeleton />;
+
+    }
 
 
     async function deleteStudentHandler(id) {
 
         try {
 
-            await deleteStudent(id);
+            await toast.promise(
 
-            alert("Student Deleted Successfully");
+                deleteStudent(id),
 
+                {
+
+                    loading: "Deleting student...",
+
+                    success: "Student deleted.",
+
+                    error: "Delete failed."
+
+                }
+
+            );
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message);
         }
     }
 
 
-    return (
-        <>
+    if (students.length === 0) {
 
+        return (
 
-            <SearchBar
-
-                value={search}
-
-                onChange={(e) => setSearch(e.target.value)}
-
-                placeholder="Search Student"
-
+            <EmptyState
+                title="No Students Found"
+                description="Add your first student."
+                buttonText="Add Student"
+                onClick={() => navigate("/dashboard/students/add")}
             />
 
-            {
+        );
 
-                students.length === 0 ?
+    }
 
-                    (
+    if (filteredStudents.length === 0) {
 
-                        <EmptyState
+        return (
 
-                            title="No Students Found"
+            <>
+                <SearchBar
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search Student"
+                />
 
-                            description="Add your first student."
+                <SearchEmptyState />
+            </>
 
-                            buttonText="Add Student"
+        );
 
-                            onClick={() => navigate("/dashboard/students/add")}
+    }
 
-                        />
+    return (
 
-                    )
+        <>
+            <SearchBar
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Student"
+            />
 
-                    :
-
-                    (
-
-                        <StudentTable
-
-                            students={students}
-
-                            students={filteredStudents}
-
-                            onEdit={(id) => { navigate(`update/${id}`) }}
-
-                            onDelete={(id) => { deleteStudentHandler(id) }}
-
-                        />
-
-                    )
-
-            }
+            <StudentTable
+                students={filteredStudents}
+                onEdit={(id) => navigate(`update/${id}`)}
+                onDelete={(id) => deleteStudentHandler(id)}
+            />
         </>
-    );
 
+    );
 
 }

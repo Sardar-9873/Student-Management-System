@@ -2,6 +2,7 @@ import { logout } from "../../lib/firebase/auth";
 import auth from "../../lib/firebase/auth";
 import { useNavigate } from "react-router";
 import { FiLogOut } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 export default function Logout({ className }) {
 
@@ -11,10 +12,20 @@ export default function Logout({ className }) {
 
         try {
 
-            await logout();
+            await toast.promise(
 
-            alert("Logout Successful");
-            
+                logout(),
+
+                {
+                    loading: "Destroying current session...",
+
+                    success: "Logout Succesfull.",
+
+                    error: "Something went wrong. Please try again."
+                }
+
+            );
+
             localStorage.removeItem("username");
 
             navigate("/", { replace: true });

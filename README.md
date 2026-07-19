@@ -38,7 +38,7 @@ cd Student-Management-System
 
 npm install
 
-npm run dev
+npm run start:dev
 ```
 
 
@@ -47,3 +47,11 @@ npm run dev
 **Sahal**
 
 GitHub: https://github.com/sardar-9873
+
+
+# Remaining:
+
+1. Dialog(Modal)
+2. Pagination
+3. Dark/Light Toggle
+4. Domain name setting on Vercel

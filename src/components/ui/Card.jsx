@@ -11,7 +11,7 @@ export default function Card({
         <div
             className={`
                 bg-white
-                rounded-xl
+                rounded-4xl
                 shadow-md
                 border
                 border-slate-200

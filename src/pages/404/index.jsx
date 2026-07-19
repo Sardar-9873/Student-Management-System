@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router";
+import { MdOutlineErrorOutline } from "react-icons/md";
+import Button from "../../components/ui/Button.jsx";
 
 export default function NotFound() {
 
@@ -10,10 +12,11 @@ export default function NotFound() {
 
             <div className="text-center">
 
-                <h1 className="text-8xl font-bold text-blue-600">
 
+                <MdOutlineErrorOutline className="text-7xl text-blue-600 mb-4 animate-pulse hover:scale-105 transition" />
+
+                <h1 className="text-8xl font-bold text-blue-600 animate-pulse hover:scale-105 transition">
                     404
-
                 </h1>
 
                 <h2 className="text-3xl font-bold mt-4">
@@ -24,11 +27,11 @@ export default function NotFound() {
 
                 <p className="text-slate-500 mt-3">
 
-                    The page you are looking for doesn't exist.
+                    Oops! We couldn't find the page you were looking for.
 
                 </p>
 
-                <button
+                <Button
 
                     onClick={() => navigate("/")}
 
@@ -36,9 +39,9 @@ export default function NotFound() {
 
                 >
 
-                    Back Home
+                    Go to Dashboard
 
-                </button>
+                </Button>
 
             </div>
 

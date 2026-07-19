@@ -8,6 +8,7 @@ import Button from "../../../../components/ui/Button";
 
 import { addStudent } from "../../../../lib/firebase/firestore";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 export default function AddStudent() {
 
@@ -20,27 +21,35 @@ export default function AddStudent() {
     async function addStudentHandler() {
 
         if (!name || !age || !city) {
-            alert("Please fill all fields");
+            toast("Please fill all fields.", {
+                icon: "⚠️",
+            });
             return;
         }
 
         try {
 
-            await addStudent({
+            await toast.promise(addStudent({
 
                 name,
                 age,
                 city
 
-            });
+            }),
+                {
+                    loading: "Adding student...",
 
-            alert("Student Added Successfully");
+                    success: "Student added.",
+
+                    error: "Unable to add student."
+                }
+            );
 
             navigate("/dashboard/students");
 
         } catch (error) {
 
-            alert(error.message);
+            toast.error(error.message);
 
         }
 

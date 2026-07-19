@@ -2,7 +2,7 @@ export default function Footer() {
 
     return (
 
-        <footer className="bg-white border-t border-slate-200 py-4">
+        <footer className="bg-white border-t border-slate-200 py-6">
 
             <p className="text-center text-slate-500">
 
@@ -15,3 +15,13 @@ export default function Footer() {
     );
 
 }
+
+
+
+// export default function Footer() {
+//   return (
+//     <footer className="border-t py-6 text-center text-slate-500">
+//       © 2026 StudentMS. All Rights Reserved.
+//     </footer>
+//   );
+// }

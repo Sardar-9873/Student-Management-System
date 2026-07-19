@@ -1,5 +1,7 @@
 import { FaLock } from "react-icons/fa";
 import SignupForm from "../../components/signup/index.jsx";
+import Card from "../../components/ui/Card";
+
 
 export default function Signup() {
     return (
@@ -12,12 +14,19 @@ export default function Signup() {
             flex justify-center
             items-center">
 
-                <div className="bg-white w-96 rounded-2xl shadow-lg p-10">
+                <Card
+    className="
+        w-full
+        max-w-lg
+        mx-auto
+        p-10
+    "
+>
 
-                    <FaLock className="text-5xl text-blue-600 mx-auto mb-4" />
+                    <FaLock className="text-6xl text-blue-600 mx-auto mb-4" />
 
 
-                    <h1 className="text-4xl font-extrabold text-center">
+                    <h1 className="text-4xl font-bold text-center">
                         Create Account
                     </h1>
 
@@ -28,7 +37,7 @@ export default function Signup() {
                     <SignupForm />
 
 
-                </div>
+                </Card>
 
             </div>
 

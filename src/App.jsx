@@ -3,10 +3,8 @@ import auth, { authState } from "./lib/firebase/auth";
 import db from "./lib/firebase/firestore";
 import Signup from "./pages/signup/index.jsx";
 import Signin from "./pages/signin/index.jsx";
-import { Routes, Route } from "react-router";
 import Home from "./pages/home/index.jsx";
 import Dashboard from "./pages/dashboard/index.jsx";
-import { useEffect, useState } from "react";
 import ProtectedRoute from "./components/ProtectedRoute/index.jsx";
 import PublicRoute from "./components/PublicRoute/index.jsx";
 import StudentsLayout from "./pages/dashboard/students/Students-Layout.jsx";
@@ -15,9 +13,11 @@ import AddStudent from "./pages/dashboard/students/add/index.jsx";
 import UpdateStudent from "./pages/dashboard/students/update/index.jsx";
 import DashboardLayout from "./layouts/DashboardLayout.jsx";
 import Loader from "./components/ui/Loader.jsx";
-import About from "./pages/about/index.jsx";
-import Settings from "./pages/settings/index.jsx";
-import Contact from "./pages/contact/index.jsx";
+import About from "./pages/dashboard/about/index.jsx";
+import Settings from "./pages/dashboard/settings/index.jsx";
+import Contact from "./pages/dashboard/contact/index.jsx";
+import { Routes, Route } from "react-router";
+import { useEffect, useState } from "react";
 
 
 function App() {
