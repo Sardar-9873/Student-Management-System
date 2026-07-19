@@ -55,3 +55,4 @@ GitHub: https://github.com/sardar-9873
 2. Pagination
 3. Dark/Light Toggle
 4. Domain name setting on Vercel
+5. Reviewing Components
