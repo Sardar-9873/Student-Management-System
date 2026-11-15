@@ -1,4 +1,6 @@
 import { FiMenu } from "react-icons/fi";
+import { FaUserGraduate } from "react-icons/fa6";
+
 
 export default function Navbar({ setSidebarOpen }) {
 
@@ -23,11 +25,12 @@ export default function Navbar({ setSidebarOpen }) {
 
                 <div className="flex items-center gap-3">
 
-                    <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold">
+                    {/* <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold"> */}
 
-                        S
+                        <FaUserGraduate className="text-2xl text-blue-600" />
+                        
 
-                    </div>
+                    {/* </div> */}
 
                     <h1 className="text-xl lg:text-2xl font-bold">
 
